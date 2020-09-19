@@ -1,11 +1,11 @@
 # `TBGlobalist Covid-19`
 
-This repository is collection of python scripts used by [tbglobalist.com](https://tbglobalist.com) for its publications.
+This repository is collection of python scripts used by [tbglobalist.com](https://www.tbglobalist.com) for its publications.
 
-The original intend is to create a list of scripts to regularly update the [tbglobalist.com](https://tbglobalist.com) 
+The original intend is to create a list of scripts to regularly update the [tbglobalist.com](https://www.tbglobalist.com) 
 site with articles on Covid-19.
 
-Any files of this repository, along with articles on Covid-19 published on [tbglobalist.com](https://tbglobalist.com), 
+Any files of this repository, along with articles on Covid-19 published on [tbglobalist.com](https://www.tbglobalist.com), 
 are released under [GNU license]().
 The aim is to encourage worldwide programmers and the scientific community to contribute with their expertise, in order 
 to make general improvements to the researches and propose new ones.
