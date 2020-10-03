@@ -14,6 +14,8 @@ import locale
 import os
 from datetime import date
 
+pd.options.mode.chained_assignment = None
+
 today = date.today()
 locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
@@ -40,8 +42,14 @@ class CovidData:
 
     # create dataframe where to store countries and their relative value, which will then be plotted via plotlib lib
     owid_to_plot_df = pd.DataFrame(columns=['continent', 'country', 'deaths_on_over65'])
-
     over65_age = 0
+
+    # create dataframe where to store countries and their covid series, adjusted by deaths of over 65 years old
+    # (relative value) and stringency index. The dataframe will be used to plot deaths of over 65 years old and the
+    # stringency index
+    stringency65_to_plot_df = pd.DataFrame(columns=['continent', 'location', 'date', 'total_cases', 'total_deaths',
+                                                    'stringency_index', 'gdp_per_capita', 'new_deaths', 'over65_pop',
+                                                    'new_deaths_over65'])
 
     # A list containing the European countries object of investigation
     european_countries = ['Austria', 'Belgium', 'Czech Republic ', 'France', 'Germany', 'Iceland', 'Italy', 'Lithuania',
@@ -106,6 +114,14 @@ class CovidData:
                                                                ignore_index=True)
 
             self.over65_age = 0
+            self._tot_series_onStringency(continent, country, country_df['over65_pop'])
+
+    def _tot_series_onStringency(self, continent, country, over65pop):
+        country_df = self.light_owid_df.loc[self.light_owid_df['location'] == country]
+        country_df['over65_pop'] = over65pop
+        country_df['new_deaths_over65'] = round(country_df['new_deaths'] / country_df['over65_pop'] * 100, 5)
+        country_df['continent'] = continent
+        self.stringency65_to_plot_df = self.stringency65_to_plot_df.append(country_df, ignore_index=True)
 
     # Example usage below
     """
